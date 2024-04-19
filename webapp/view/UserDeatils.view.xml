@@ -1,0 +1,363 @@
+<mvc:View
+    controllerName="com.ibs.forgotpasswd.controller.UserDeatils"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="Forgot Password / Unlock User"
+    >
+        <MessageStrip
+            id="_IDStrip1"
+            type="Information"
+            text="Please select your username and generate an OTP to verify your identity. The OTP will be sent to your registered email address."
+            showIcon="true"
+            visible="true"
+            showCloseButton="false"
+            class="sapUiMediumMarginBottom"
+        />
+        <content />
+
+        <HBox
+            id="_IDGenHBox1"
+            class="sapUiResponsiveMargin"
+            justifyContent="Center"
+            alignItems="Center"
+        >
+            <Label
+                id="_IDGenLabel1"
+                text="USER ID"
+                design="Bold"
+                required="true"
+                class="sapUiResponsiveMargin"
+            />
+            <Input
+                id="_idUserId"
+                width="250px"
+                class="sapUiResponsiveMargin"
+                placeholder="Select your user id"
+                showValueHelp="true"
+                required="true"
+                valueHelpRequest="handleValueHelp"
+                showSuggestion="true"
+                showTableSuggestionValueHelp="true"
+                suggestionRows="{oUserList>/results}"
+            >
+                <suggestionColumns>
+                    <Column
+                        id="_IDGenColumn1"
+                        hAlign="Begin"
+                        popinDisplay="Inline"
+                        demandPopin="true"
+                    >
+                        <Label
+                            id="_IDGenLabel2"
+                            text="User Name"
+                        />
+                    </Column>
+                </suggestionColumns>
+                <suggestionRows>
+                    <ColumnListItem id="_IDGenColumnListItem1">
+                        <cells>
+                            <Text
+                                id="_IDGenText1"
+                                text="{oUserList>Bname}"
+                                valueLiveUpdate="true"
+                                type="Text"
+                                showValueHelp="true"
+                                valueHelpRequest="handleValueHelp"
+                                showSuggestion="true"
+                                showTableSuggestionValueHelp="true"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </suggestionRows>
+            </Input>
+            <Button
+                id="_IDGenButton1"
+                class="sapUiResponsiveMargin"
+                icon="sap-icon://employee-lookup"
+                text="Submit"
+                tooltip="Get User Details"
+                press="onSubmit"
+            />
+        </HBox>
+
+        <VBox
+            id="_IDGenVBox1"
+            class="sapUiSmallMargin"
+            visible="false"
+        >
+            <f:SimpleForm
+                id="SimpleFormDisplay354wideDual"
+                editable="false"
+                layout="ResponsiveGridLayout"
+                title="User Details"
+                labelSpanXL="4"
+                labelSpanL="3"
+                labelSpanM="4"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="4"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <core:Title
+                        id="_IDGenTitle1"
+                        text="User Details"
+                    />
+                    <Label
+                        id="_IDGenLabel3"
+                        text="User ID"
+                    />
+                    <Text
+                        id="_IDnameText"
+                        text=""
+                    />
+                    <Label
+                        id="_IDGenLabel"
+                        text="Full name"
+                    />
+                    <Text
+                        id="_IDnameText1"
+                        text=""
+                    />
+                    <Label
+                        id="_IDGenLabel4"
+                        text="Primery Email ID"
+                    />
+                    <Text
+                        id="_IDGenText2"
+                        text=""
+                    />
+                    <Label
+                        id="_IDGenLabel44"
+                        text="Mobile No."
+                    />
+                    <Text
+                        id="_IDGenText22"
+                        text=""
+                    />
+                    <Label
+                        id="_IDGenLabel5"
+                        text="Status"
+                    />
+                    <Text
+                        id="_IDGenText3"
+                        text=""
+                    />
+                    <Label
+                        id="_IDGenLabel6"
+                        text="Last Changed By"
+                    />
+                    <Text
+                        id="_IDGenText4"
+                        text=""
+                    />
+                    <Label
+                        id="_IDGenLabel7"
+                        text="Last Changed Date"
+                    />
+                    <Text
+                        id="_IDGenText5"
+                        text=""
+                    />
+                    <!-- <core:Title id="_IDGenTitle2" text="Online" />-->
+                    <Label
+                        id="_IDGenLabel8"
+                        text="Dpartment"
+                    />
+                    <Text
+                        id="_IDGenText6"
+                        text=""
+                    />
+                    <!--   <Label id="_IDGenLabel8" text="Twitter account of the contact" />
+                    <Text id="_IDGenText6" text="Twitter" /> -->
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+
+        <HBox
+            id="_IDGenVBox2"
+            class="sapUiResponsiveMargin"
+            justifyContent="Center"
+            alignItems="Center"
+            visible="false"
+        >
+            <Button
+                id="_IDGenButton2"
+                class="sapUiTinyMargin"
+                icon="sap-icon://BusinessSuiteInAppSymbols/icon-ab-testing"
+                text="Generate OTP"
+                tooltip="Generate OTP"
+                press="_onGOTP"
+            />
+        </HBox>
+        <VBox
+            id="_IDGenVBox3"
+            alignItems="Center"
+            justifyContent="Center"
+            visible="false"
+            width="100%"
+        >
+            <Text
+                id="_IDGenText7"
+                text="Please enter the OTP code you received:"
+            />
+            <l:HorizontalLayout id="_IDGenHorizontalLayout1">
+                <Input
+                    id="_idinOTP1"
+                    enabled="false"
+                    maxLength="1"
+                    liveChange="onInputChange"
+                    class="sapUiTinyMarginBegin"
+                    type="Number"
+                    width="2rem"
+                    textAlign="Center"
+                />
+                <Input
+                    id="_idinOTP2"
+                    enabled="false"
+                    maxLength="1"
+                    liveChange="onInputChange"
+                    class="sapUiTinyMarginBegin"
+                    type="Number"
+                    width="2rem"
+                    textAlign="Center"
+                />
+                <Input
+                    id="_idinOTP3"
+                    enabled="false"
+                    maxLength="1"
+                    liveChange="onInputChange"
+                    class="sapUiTinyMarginBegin"
+                    type="Number"
+                    width="2rem"
+                    textAlign="Center"
+                />
+                <Input
+                    id="_idinOTP4"
+                    enabled="false"
+                    maxLength="1"
+                    liveChange="onInputChange"
+                    class="sapUiTinyMarginBegin"
+                    type="Number"
+                    width="2rem"
+                    textAlign="Center"
+                />
+            </l:HorizontalLayout>
+            <Button
+                id="_IDGenButton3"
+                class="sapUiTinyMargin"
+                icon="sap-icon://sys-enter-2"
+                text="Verify OTP"
+                tooltip="Verify OTP"
+                press="_onVOTP"
+                enabled="false"
+            />
+        </VBox>
+        <HBox
+            id="_IDGenVBox4"
+            class="sapUiResponsiveMargin"
+            justifyContent="Center"
+            alignItems="Center"
+            visible="false"
+        >
+            <Button
+                id="_IDGenButton4"
+                class="sapUiTinyMargin"
+                icon="sap-icon://unlocked"
+                text="Unlock"
+                tooltip="Unlock User"
+                press="_onUnlock"
+                enabled="false"
+            />
+        </HBox>
+
+        <VBox
+            id="_IDGenVBox5"
+            alignItems="Center"
+            justifyContent="Center"
+            visible="false"
+            width="100%"
+        >
+            <l:VerticalLayout id="_IDGenHorizontalLayout2">
+                <l:HorizontalLayout id="_IDGenHorizontalLayout3" >
+                <Input
+                    id="_odPass1"
+                    enabled="true"
+                    maxLength="15"
+                    placeholder="Enter Password"
+                    class="sapUiTinyMarginBegin"
+                    type="Password"
+                    width="15rem"
+                    textAlign="Begin"
+                />
+                <Button
+                id="_IDGenButton6"
+                class="sapUiTinyMarginBottom sapUiTinyMarginBegin"
+                icon="sap-icon://show"
+                tooltip="Show Password"
+                press="_ShowPress6"
+            />
+        </l:HorizontalLayout>
+        <l:HorizontalLayout id="_IDGenHorizontalLayout4" >
+                <Input
+                    id="_odPass2"
+                    enabled="true"
+                    maxLength="15"
+                    placeholder="Re-enter Password"
+                    class="sapUiTinyMarginBegin"
+                    type="Password"
+                    width="15rem"
+                    textAlign="Begin"
+                />
+                <Button
+                id="_IDGenButton7"
+                class="sapUiTinyMarginBottom sapUiTinyMarginBegin"
+                icon="sap-icon://show"
+                tooltip="Show Password"
+                press="_ShowPress7"
+            />
+        </l:HorizontalLayout>
+            </l:VerticalLayout>
+            <Button
+                id="_IDGenButton5"
+                class="sapUiTinyMargin"
+                icon="sap-icon://reset"
+                text="Reset Password"
+                tooltip="Reset Password"
+                press="_onRestPass"
+                enabled="false"
+            />
+        </VBox>
+        <MessageStrip
+            id="_IDStrip2"
+            type="Error"
+            text="NaN"
+            showIcon="true"
+            visible="false"
+            showCloseButton="false"
+            class="sapUiMediumMarginTop"
+        />
+        <MessageStrip
+            id="_IDStrip3"
+            type="Warning"
+            text="NaN"
+            showIcon="true"
+            visible="false"
+            showCloseButton="false"
+            class="sapUiTinyMarginTop"
+        />
+    </Page>
+</mvc:View>
