@@ -8,7 +8,7 @@ sap.ui.define([
   'sap/ui/model/Filter',
   'sap/ui/model/ValidateException'
 ],
-  /** nnn
+  /** nnnnn
    * @param {typeof sap.ui.core.mvc.Controller} Controller
    */
   function (Controller, JSONModel, MessageBox, MessageToast, DateFormat, ResourceModel, Filter, ValidateException,) {
